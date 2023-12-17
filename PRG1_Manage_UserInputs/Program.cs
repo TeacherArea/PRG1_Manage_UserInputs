@@ -11,32 +11,35 @@ namespace PRG1_Manage_UserInputs
         static void TestANumber()
         {
             Console.WriteLine("Hello World!");
-            string? input;
-            bool run = true;
-            while (run)
+            while (true)
             {
                 Console.Write("Feed me with a number, please: ");
-                input = Console.ReadLine();
-                if (!double.TryParse(input, out double correct) || String.IsNullOrEmpty(input))
-                {
-                    Console.WriteLine($"Nope. Not a correct number. Try Again! ");
-                }
-                else
+                string? input = Console.ReadLine();
+                if (double.TryParse(input, out double correct))
                 {
                     Console.WriteLine($"Thanks. The number is {correct}");
-                    Console.Write("Feed me again? [y/n]");
-                    string? goAgain = Console.ReadLine();
-                    if (goAgain == "n" || goAgain == "N")
+                    Console.Write("Feed me again? [yes/no] ");
+                    string? goAgain = Console.ReadLine()?.Trim().ToLower();
+                    if (goAgain == "no")
                     {
                         Console.WriteLine("Ok. But remember me when you come across a number, yes? Bye!");
-                        run = false;
+                        break;
+                    }
+                    else if (goAgain == "yes")
+                    {
+                        Console.WriteLine("Yes, yes... numbers is da best!");
                     }
                     else
                     {
-                        Console.WriteLine("Yes, eyes... numbers is da best!");
+                        Console.WriteLine("That was not a no, so I'll assume you want to continue.");
                     }
+                }
+                else
+                {
+                    Console.WriteLine("Nope. That's not a correct number. Try Again!");
                 }
             }
         }
     }
 }
+
